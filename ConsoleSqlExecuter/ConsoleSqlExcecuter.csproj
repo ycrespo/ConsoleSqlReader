@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{2176DDF6-5746-47B7-9429-F216CFE58174}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>ConsoleSqlExecuter</RootNamespace>
-    <AssemblyName>ConsoleSqlExecuter</AssemblyName>
+    <RootNamespace>ConsoleSqlExcecuter</RootNamespace>
+    <AssemblyName>ConsoleSqlExcecuter</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -32,7 +32,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=4.9.4.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.4.9.4\lib\net45\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Dapper, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.2.0.4\lib\netstandard2.0\Dapper.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -42,11 +49,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ContainerConfiguration.cs" />
+    <Compile Include="Gateways\Gateway.cs" />
+    <Compile Include="FolderManagers\FolderManager.cs" />
+    <Compile Include="Models\FileReaderParam.cs" />
+    <Compile Include="Models\Result.cs" />
+    <Compile Include="Models\SqlInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Readers\DataReader.cs" />
+    <Compile Include="Readers\FileReader.cs" />
+    <Compile Include="Readers\IDataReader.cs" />
+    <Compile Include="Readers\IFileReader.cs" />
+    <Compile Include="Workers\IWorker.cs" />
+    <Compile Include="Workers\Worker.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

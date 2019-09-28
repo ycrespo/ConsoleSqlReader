@@ -1,15 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Configuration;
+using Autofac;
+using ConsoleSqlExcecuter.Models;
+using ConsoleSqlExcecuter.Workers;
 
-namespace ConsoleSqlExecuter
+
+namespace ConsoleSqlExcecuter
 {
-    class Program
+    internal class Program
     {
         static void Main(string[] args)
         {
+            var connectionStrings = ConfigurationManager.ConnectionStrings;
+
+            var localConnectionString = connectionStrings["LocalConnectionString"].ConnectionString;
+            var root = ConfigurationManager.AppSettings["Root"];
+            var rootFolder = ConfigurationManager.AppSettings["RootFolder"];
+            var destinationFolder = ConfigurationManager.AppSettings["DestinationFolder"];
+            
+            var @params = new FileReaderParam(root, rootFolder, destinationFolder);
+
+
+            using (var container = ContainerConfiguration.InitContainer(localConnectionString,  @params))
+            {
+                container.Resolve<IWorker>().Work();
+            }
         }
     }
 }
